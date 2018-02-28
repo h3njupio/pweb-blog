@@ -9,7 +9,7 @@ def misc_list(request):
         user_id = request.POST['user_id']
         user_pw = request.POST['user_pw']
         platform_type = request.POST['platform_type']
-        print(platform_type)
+
         result = ""
         if platform_type == "PC":
             driver = chrome_driver()
