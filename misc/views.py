@@ -32,6 +32,7 @@ def chrome_driver():
     ## 옵션
     options = webdriver.ChromeOptions()
     options.add_argument('headless')
+    options.add_argument('no-sandbox')
     ## headless브라우저로 인식되지 않도록 UserAgent값 변경
     ## headless브라우저 UserAgent값 : User-Agent:  Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/64.0.3282.119 Safari/537.36
     options.add_argument("User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.119 Safari/537.36")
