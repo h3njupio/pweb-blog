@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 from appium import webdriver as mobiledriver
 import os
+import platform
 
 def misc_list(request):
     if request.method == 'POST':
@@ -31,8 +32,14 @@ def chrome_driver():
     ## headless브라우저 UserAgent값 : User-Agent:  Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/64.0.3282.119 Safari/537.36
     options.add_argument("User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.119 Safari/537.36")
 
+    driver = ''
+    if str(platform.system()).upper() == 'WINDOWS':
+        driver = 'chromedriver.exe'
+    else:
+        driver = 'chromedriver'
+
     ## 드라이버생성
-    chrome_driver = webdriver.Chrome(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'driver', 'chromedriver'), chrome_options=options)
+    chrome_driver = webdriver.Chrome(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'driver', driver), chrome_options=options)
     #chrome_driver = webdriver.Chrome(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'driver', 'chromedriver'))
     return chrome_driver
 
