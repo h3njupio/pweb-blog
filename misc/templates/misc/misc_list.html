@@ -5,6 +5,7 @@
     <title>Misc App</title>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 </head>
 <body>
 <div class="content container">
@@ -16,6 +17,7 @@
             <h4>Check it</h4>
             <form method="POST">
                 {% csrf_token %}
+                <input type="text" name="platform_type" class="form-control" id="platform_type">
                 <div class="form-group">
                     <input type="text" name="user_id" class="form-control" id="user_id" placeholder="Username">
                 </div>
@@ -28,4 +30,18 @@
     </div>
 </div>
 </body>
+<script>
+    var filter = "win16|win32|win64|mac";
+    var nType = "";
+
+    if (navigator.platform) {
+        if (filter.indexOf(navigator.platform.toLowerCase()) < 0) {
+            nType = "M";
+        } else {
+            nType = "P";
+        }
+    }
+
+    $("input[type=text][name=platform_type]").val(nType)
+</script>
 </html>

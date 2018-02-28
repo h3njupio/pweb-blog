@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from bs4 import BeautifulSoup
 from selenium import webdriver
+from appium import webdriver as mobiledriver
 import os
 
 def misc_list(request):
