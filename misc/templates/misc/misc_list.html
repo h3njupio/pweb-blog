@@ -17,7 +17,10 @@
             <h4>Check it</h4>
             <form method="POST">
                 {% csrf_token %}
-                <input type="text" name="platform_type" class="form-control" id="platform_type">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success btn-sm active" disabled>접속경로 : PC</button>
+                    <input type="hidden" name="platform_type" class="form-control" id="platform_type" readonly>
+                </div>
                 <div class="form-group">
                     <input type="text" name="user_id" class="form-control" id="user_id" placeholder="Username">
                 </div>
@@ -39,10 +42,10 @@
             var varUA = navigator.userAgent.toLowerCase(); //userAgent 값 얻기
             if (varUA.match('android') != null) {
                 //안드로이드 일때 처리
-                nType = "M_A"
+                nType = "MOBILE_ANDROID"
             } else if (varUA.indexOf("iphone")>-1||varUA.indexOf("ipad")>-1||varUA.indexOf("ipod")>-1) {
                 //IOS 일때 처리
-                nType = "M_I"
+                nType = "MOBILE_IOS"
             } else {
                 //아이폰, 안드로이드 외 처리
                 alert("Unsupported browsers")
@@ -51,7 +54,6 @@
             nType = "PC";
         }
     }
-    alert(nType);
-    $("input[type=text][name=platform_type]").val(nType)
+    $("input[type=text][name=platform_type]").val("접속경로 : " + nType);
 </script>
 </html>
