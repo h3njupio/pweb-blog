@@ -15,12 +15,13 @@
     <div class="row">
         <div class="col-md-12">
             <h4>Check it</h4>
+            <div class="form-group">
+                <span class="label label-success" name="info_path">접속경로 : NONE</span>
+                <span class="label label-default" name="info_current">로그인필요</span>
+            </div>
             <form method="POST">
                 {% csrf_token %}
-                <div class="form-group">
-                    <button type="submit" class="btn btn-success btn-sm active" name="info_path" disabled>접속경로 : PC</button>
-                    <input type="hidden" name="platform_type" class="form-control" id="platform_type" readonly>
-                </div>
+                <input type="hidden" name="platform_type" class="form-control" id="platform_type">
                 <div class="form-group">
                     <input type="text" name="user_id" class="form-control" id="user_id" placeholder="Username">
                 </div>
@@ -55,6 +56,6 @@
         }
     }
     $("input[type=text][name=platform_type]").val(nType);
-    $("button[name=info_path]").val("접속경로 : " + nType);
+    $("span[name=info_path]").html("접속경로 : " + nType);
 </script>
 </html>
