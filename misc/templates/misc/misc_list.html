@@ -36,12 +36,13 @@
 
     if (navigator.platform) {
         if (filter.indexOf(navigator.platform.toLowerCase()) < 0) {
-            nType = navigator.platform;
+            if(!!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform)) {
+                nType = MI;
+            } else {
+                nType = MA;
         } else {
             nType = "P";
         }
     }
-
-    $("input[type=text][name=platform_type]").val(nType)
 </script>
 </html>
