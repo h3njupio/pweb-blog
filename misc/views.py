@@ -18,7 +18,12 @@ def misc_list(request):
         elif platform_type == "MOBILE":
             result = m_chrome_driver(user_id, user_pw)
 
-        return render(request, 'misc/misc_list.html', {'status':result})
+        if str(platform.system()).upper() == 'WINDOWS':
+            driver = 'chromedriver.exe'
+        else:
+            driver = 'chromedriver'
+
+        return render(request, 'misc/misc_list.html', {'status':result, 'os':driver})
 
     elif request.method == 'GET':
         return render(request, 'misc/misc_list.html')
@@ -32,7 +37,6 @@ def chrome_driver():
     ## headless브라우저 UserAgent값 : User-Agent:  Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/64.0.3282.119 Safari/537.36
     options.add_argument("User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.119 Safari/537.36")
 
-    driver = ''
     if str(platform.system()).upper() == 'WINDOWS':
         driver = 'chromedriver.exe'
     else:
