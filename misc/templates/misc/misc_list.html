@@ -36,7 +36,7 @@
 
     if (navigator.platform) {
         if (filter.indexOf(navigator.platform.toLowerCase()) < 0) {
-            nType = "M";
+            nType = navigator.platform;
         } else {
             nType = "P";
         }
