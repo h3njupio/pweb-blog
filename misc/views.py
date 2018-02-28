@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from bs4 import BeautifulSoup
 from selenium import webdriver
-from appium import webdriver as mobiledriver
 import os
 import platform
 
@@ -43,7 +42,7 @@ def chrome_driver():
         driver = 'chromedriver'
 
     ## 드라이버생성
-    chrome_driver = webdriver.Chrome(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'driver', driver), chrome_options=options)
+    chrome_driver = webdriver.Chrome(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'driver', ''), chrome_options=options)
     #chrome_driver = webdriver.Chrome(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'driver', 'chromedriver'))
     return chrome_driver
 
