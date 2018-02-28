@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog',
     'video',
+    'parsed_data',
+    'misc',
 ]
 
 MIDDLEWARE = [
@@ -121,3 +123,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+# token
+TELE_TOKEN = '532353853:AAHLiOp-04NICfrQllRAGQl75kBHR-LFXZs'

@@ -19,9 +19,13 @@ from django.apps import apps
 
 blog = apps.get_app_config('blog').verbose_name
 video = apps.get_app_config('video').verbose_name
+parse = apps.get_app_config('parsed_data').verbose_name
+misc = apps.get_app_config('misc').verbose_name
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('blog/', include(('blog.urls', blog), namespace='blog')),
     re_path('^video/', include(('video.urls', video), namespace='video')),
+    re_path('^parse/', include(('parsed_data.urls', parse), namespace='parse')),
+    re_path('^misc/', include(('misc.urls', misc), namespace='misc')),
 ]
