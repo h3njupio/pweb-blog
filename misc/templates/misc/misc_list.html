@@ -12,24 +12,30 @@
     <header class="page-header" style="overflow: auto;">
         <h1 style="display: inline;">Misc App List</h1>
     </header>
-    <div class="row">
-        <div class="col-md-12">
-            <h4>Check it</h4>
-            <div class="form-group">
-                <span class="label label-success" name="info_path">접속경로 : NONE</span>
-                <span class="label label-default" name="info_current">로그인필요</span>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">Check it</h4>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <span class="label label-success" name="info_path">접속경로 : NONE</span>
+                        <span class="label label-success" name="info_status"></span>
+                    </div>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="platform_type" class="form-control" id="platform_type">
+                        <div class="form-group">
+                            <input type="text" name="user_id" class="form-control" id="user_id" placeholder="Username">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" name="user_pw" class="form-control" id="user_pw" placeholder="Password">
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                </div>
             </div>
-            <form method="POST">
-                {% csrf_token %}
-                <input type="hidden" name="platform_type" class="form-control" id="platform_type">
-                <div class="form-group">
-                    <input type="text" name="user_id" class="form-control" id="user_id" placeholder="Username">
-                </div>
-                <div class="form-group">
-                    <input type="password" name="user_pw" class="form-control" id="user_pw" placeholder="Password">
-                </div>
-                <button type="submit" class="btn btn-default">Submit</button>
-            </form>
         </div>
     </div>
 </div>
@@ -43,10 +49,10 @@
             var varUA = navigator.userAgent.toLowerCase(); //userAgent 값 얻기
             if (varUA.match('android') != null) {
                 //안드로이드 일때 처리
-                nType = "MOBILE_ANDROID"
+                nType = "MOBILE"
             } else if (varUA.indexOf("iphone")>-1||varUA.indexOf("ipad")>-1||varUA.indexOf("ipod")>-1) {
                 //IOS 일때 처리
-                nType = "MOBILE_IOS"
+                nType = "MOBILE"
             } else {
                 //아이폰, 안드로이드 외 처리
                 alert("Unsupported browsers")
@@ -55,7 +61,18 @@
             nType = "PC";
         }
     }
-    $("input[type=text][name=platform_type]").val(nType);
-    $("span[name=info_path]").html("접속경로 : " + nType);
+    $('input[type=hidden][name=platform_type]').val(nType);
+    $('span[name=info_path]').html('접속경로 : ' + nType);
+
+    if("{{ status }}" == "출근체크") {
+        $('span[name=info_status]').html('출근전');
+        $('span[name=info_status]').attr('class', 'label label-default');
+    } else if ("{{ status }}" == "퇴근체크") {
+        $('span[name=info_status]').html('퇴근전');
+        $('span[name=info_status]').attr('class', 'label label-warning');
+    } else {
+        $('span[name=info_status]').html('로그인필요');
+        $('span[name=info_status]').attr('class', 'label label-danger');
+    }
 </script>
 </html>
