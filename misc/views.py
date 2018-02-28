@@ -8,7 +8,7 @@ def misc_list(request):
     if request.method == 'POST':
         user_id = request.POST['user_id']
         user_pw = request.POST['user_pw']
-        driver = chrome_driver()
+        driver = m_chrome_driver()
         wfms(driver, user_id, user_pw)
 
     elif request.method == 'GET':
@@ -27,6 +27,17 @@ def chrome_driver():
     #chrome_driver = webdriver.Chrome(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'driver', 'chromedriver'), chrome_options=options)
     chrome_driver = webdriver.Chrome(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'driver', 'chromedriver'))
     return chrome_driver
+
+
+def m_chrome_driver():
+    desired_caps = {}
+    desired_caps['platformName'] = 'Android'
+    desired_caps['platformVersion'] = '4.2'
+    desired_caps['deviceName'] = 'Android Emulator'
+    desired_caps['app'] = '../../../apps/selendroid-test-app.apk'
+
+    m_chrome_driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_caps)
+    return m_chrome_driver
 
 
 def wfms(driver, user_id, user_pw):

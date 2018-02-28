@@ -36,13 +36,19 @@
 
     if (navigator.platform) {
         if (filter.indexOf(navigator.platform.toLowerCase()) < 0) {
-            if(!!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform)) {
-                nType = MI;
+            var varUA = navigator.userAgent.toLowerCase(); //userAgent 값 얻기
+            if (varUA.match('android') != null) {
+                //안드로이드 일때 처리
+                nType = "M_A"
+            } else if (varUA.indexOf("iphone")>-1||varUA.indexOf("ipad")>-1||varUA.indexOf("ipod")>-1) {
+                //IOS 일때 처리
+                nType = "M_I"
             } else {
-                nType = MA;
+                //아이폰, 안드로이드 외 처리
+                alert("Unsupported browsers")
             }
         } else {
-            nType = "P";
+            nType = "PC";
         }
     }
     alert(nType);
